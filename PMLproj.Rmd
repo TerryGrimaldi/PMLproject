@@ -154,8 +154,10 @@ modFitgbm <- train(classe ~ ., data=wrkTraining, method = "gbm",
                  trControl = fitCntrl,
                  verbose = FALSE)
 
-gbmPredTest <- predict(modFitgbm, newdata=wrkTraining)
-gbmAccuTest <- confusionMatrix(gbmPredTest, wrkTraining$classe)
+modFinalgbm <- modFitgbm$finalModel
+
+gbmPredTest <- predict(modFitgbm, newdata=wrkTesting)
+gbmAccuTest <- confusionMatrix(gbmPredTest, wrkTesting$classe)
 gbmAccuTest
 
 plot(modFitgbm, ylim=c(0.9, 1))
@@ -167,8 +169,6 @@ Three Machine Learning models where checked against wrkTraining dataset, of whic
 ```{R echo=TRUE, message=FALSE}
 prediction <- predict(modFitrf, rawTesting, type = "class")
 prediction
-
-knit(PMLproj.rmd, PMLproj.md)
 ``` 
 
 
